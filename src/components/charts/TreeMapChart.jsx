@@ -124,7 +124,7 @@ export default function TreeMapChart({width}) {
     const parents = ['']; // Root has no parent
     const values = [100]; // You can set a dummy value; Plotly will calculate
 
-    const colors = ['pink'];
+    const colors = ['black'];
 
     data.forEach(sector => {
         ids.push(sector.name);
@@ -155,7 +155,7 @@ export default function TreeMapChart({width}) {
             // textinfo: "label+value+percent parent",
             // hoverinfo: "label+value+percent parent",
             texttemplate:
-                "<span style='font-size:16px;color:black;'>%{label}</span> <span style='font-size:12px;color:black;'>(%{percentParent:.2%})</span><br>" +
+                "<span style='font-size:16px;color:black;border-radius:50px'>%{label}</span> <span style='font-size:12px;color:black;'>(%{percentParent:.2%})</span><br>" +
                 "<span style='font-size:12px;color:black;'>%{value}%</span><br>",
             hovertemplate: "<b>%{label}</b><br>Value: %{value}<br>Parent %: %{percentParent:.2%}<br><extra></extra>",
             branchvalues: "total",

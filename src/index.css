@@ -1,5 +1,14 @@
 @import "tailwindcss";
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
 
+/* @layer base {
+  html {
+    @apply transition-colors duration-300;
+  }
+  body {
+    @apply bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100;
+  }
+} */
 
 /* Modern thin scrollbar */
 .scrollbar-thin::-webkit-scrollbar {
@@ -28,4 +37,8 @@
 
 .blinking-icon {
   animation: blink .5s infinite;
+}
+
+body{
+  font-family: 'Nunito', sans-serif;
 }

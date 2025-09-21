@@ -1,6 +1,5 @@
 import { useState } from "react";
-import { EQUITY_ICON_URL } from "../config/urlConfig";
-import { Link } from "react-router-dom";
+import StockTable from "../components/charts/StockTable";
 // Stock Data
 const stockData = {
   "Nifty 50": {
@@ -66,15 +65,15 @@ export default function MarketHomePage() {
       </div>
 
       {/* Chart Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Top Gainers */}
-        <div className="bg-white shadow rounded-lg p-4">
+        <div className="bg-white dark:bg-gray-900 shadow rounded-lg p-4 dark:border-1 dark:border-gray-700">
           <h3 className="text-lg font-semibold mb-4 text-green-600">Top Gainers</h3>
           <StockTable stocks={currentData.topGainers} type="gainer" />
         </div>
 
         {/* Top Losers */}
-        <div className="bg-white shadow rounded-lg p-4">
+        <div className="bg-white dark:bg-gray-900 shadow rounded-lg p-4 dark:border-1 dark:border-gray-700">
           <h3 className="text-lg font-semibold mb-4 text-red-600">Top Losers</h3>
           <StockTable stocks={currentData.topLosers} type="loser" />
         </div>
@@ -83,46 +82,3 @@ export default function MarketHomePage() {
   );
 }
 
-function StockTable({ stocks, type }) {
-  return (
-    <div className="relative overflow-x-auto">
-      <table className="w-full text-sm text-left text-gray-700">
-        <thead className="text-xs uppercase bg-gray-100">
-          <tr>
-            <th className="px-6 py-3">Stock</th>
-            <th className="px-6 py-3">Change</th>
-            <th className="px-6 py-3">Price</th>
-            <th className="px-6 py-3">Volume</th>
-          </tr>
-        </thead>
-        <tbody>
-          {stocks.map((stock) => (
-            <tr
-              key={stock.name}
-              className="bg-white border-b hover:bg-gray-50 transition border-gray-100"
-            >
-              <td className="px-4 py-3 font-medium text-gray-900">
-                <div className="flex items-center gap-x-2">
-                  <img
-                    className="w-10 h-10 rounded-full"
-                    src={EQUITY_ICON_URL+"/"+stock.name+".png"}
-                    alt="Graph icon"
-                  />
-                  
-                  <Link to={"/market/stocks/"+stock.name}><span>{stock.name}</span></Link>
-                </div>
-              </td>
-              <td className={`px-4 py-3 font-semibold ${type === "gainer" ? "text-green-600" : "text-red-600"}`}>
-                {stock.change}
-              </td>
-              <td className={`px-4 py-3 font-semibold ${type === "gainer" ? "text-green-600" : "text-red-600"}`}>
-                ₹{stock.price}
-              </td>
-              <td className="px-4 py-3">{stock.volume}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
-  );
-}
