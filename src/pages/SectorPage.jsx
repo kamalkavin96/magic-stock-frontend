@@ -30,7 +30,7 @@ const SectorHeader = () => {
                 Find market opportunities with our powerful scanning tools
             </p>
 
-            <form className="relative flex items-center" onSubmit={handleSubmit}>
+            {/* <form className="relative flex items-center" onSubmit={handleSubmit}>
                 <div className="relative w-full">
                     <div className="absolute inset-y-0 start-0 flex items-center pl-3 pointer-events-none">
                         <Search className="w-5 h-5 text-gray-400" />
@@ -69,7 +69,7 @@ const SectorHeader = () => {
                     <Filter className="mr-1 h-4 w-4" />
                     Fundamental
                 </button>
-            </div>
+            </div> */}
         </div>
     );
 };
@@ -92,7 +92,7 @@ export default function SectorPage() {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        fetch(`${API_V1_BASSE_URL}/sectors/info`)
+        fetch(`${API_V1_BASSE_URL}/sector/get-all`)
             .then(response => response.json())
             .then(data => {
                 setSectorData(data);
@@ -116,18 +116,18 @@ export default function SectorPage() {
                 {loading ? renderSkeleton() : null}
 
                 {sectorData.map((sector, index) => (
-                    <Link to={"/market/sectors/" + sector.sector} key={sector.sector}>
+                    <Link to={"/market/sectors/" + sector.logoName} key={sector.id}>
                         <div className="flex shadow-md p-2 w-full dark:text-gray-100 bg-white dark:bg-gray-900 dark:border-1 dark:border-gray-700 rounded-2xl ">
                             <div className="w-40">
                                 <img
                                     className="object-cover w-30 h-30 rounded-2xl"
-                                    src={SECTOR_ICON_URL + '/' + sector.logo_name}
+                                    src={SECTOR_ICON_URL + '/' + sector.logoName + ".png"}
                                     alt="Sector Icon"
                                 />
                             </div>
                             <div className="w-60">
                                 <div className="h-1/2 flex items-end">
-                                    <h5 className="text-gray-900 dark:text-gray-100 font-bold">{sector.sector}</h5>
+                                    <h5 className="text-gray-900 dark:text-gray-100 font-bold">{sector.name}</h5>
                                 </div>
                                 <div className="text-gray-600 dark:text-gray-400 text-sm mb-1 h-1/2 flex items-start">
                                     Industries: {sector.industry_count} | Stocks: {sector.stock_count}
