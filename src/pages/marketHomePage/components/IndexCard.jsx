@@ -7,7 +7,7 @@ import {
 } from "lucide-react";
 
 
-export default function IndexCard({ name, price, change, pChange, isLive, iconName, symbol }) {
+export default function IndexCard({ name, price, change, pChange, isLive, iconName, symbol, groww_symbol }) {
     const [range, setRange] = useState("1week")
     const [interval, setInterval] = useState("2hour")
 
@@ -61,7 +61,7 @@ export default function IndexCard({ name, price, change, pChange, isLive, iconNa
             />
             <IndexChart
                 change={changeValue}
-                symbol={symbol}
+                symbol={groww_symbol}
                 range={range}
                 interval={interval}
                 setChangeValue={setChangeValue}

@@ -1,6 +1,15 @@
 import IndicesPerformanceChart from "../components/charts/IndicesPerformanceChart";
 import HeaderRow from "../components/ui/HeaderRow";
 import { useEffect, useState } from "react";
+
+import {
+  LayoutGrid,
+  BarChart3,
+  TrendingUp,
+  TrendingDown,
+  Minus,
+} from "lucide-react";
+
 import { API_V1_BASSE_URL } from "../config/urlConfig";
 
 export default function IndicesPage() {
@@ -12,9 +21,10 @@ export default function IndicesPage() {
   const [indicesNutral, setIndicesNutral] = useState(0);
 
   // FILTER STATE
-  const [selectedFilter, setSelectedFilter] = useState("ALL");
+  const [selectedFilter, setSelectedFilter] =
+    useState("ALL");
 
-  // Fetch Data
+  // FETCH DATA
   const fetchIndicesData = () => {
     fetch(`${API_V1_BASSE_URL}/indices/nse/info`)
       .then((response) => response.json())
@@ -46,11 +56,14 @@ export default function IndicesPage() {
         setIndicesNutral(nut);
       })
       .catch((error) => {
-        console.error("Error fetching data:", error);
+        console.error(
+          "Error fetching data:",
+          error
+        );
       });
   };
 
-  // Auto Refresh
+  // AUTO REFRESH
   useEffect(() => {
     fetchIndicesData();
 
@@ -61,21 +74,27 @@ export default function IndicesPage() {
     return () => clearInterval(interval);
   }, []);
 
-  // FILTER LOGIC
+  // GLOBAL FILTER
   const filteredData = indicesData
     .map((category) => {
       let filteredIndices = category.indices;
 
       if (selectedFilter === "ADV") {
-        filteredIndices = category.indices.filter((item) => item.pchange > 0);
+        filteredIndices = category.indices.filter(
+          (item) => item.pchange > 0
+        );
       }
 
       if (selectedFilter === "DEC") {
-        filteredIndices = category.indices.filter((item) => item.pchange < 0);
+        filteredIndices = category.indices.filter(
+          (item) => item.pchange < 0
+        );
       }
 
       if (selectedFilter === "NEU") {
-        filteredIndices = category.indices.filter((item) => item.pchange === 0);
+        filteredIndices = category.indices.filter(
+          (item) => item.pchange === 0
+        );
       }
 
       return {
@@ -83,7 +102,10 @@ export default function IndicesPage() {
         indices: filteredIndices,
       };
     })
-    .filter((category) => category.indices.length > 0);
+    .filter(
+      (category) =>
+        category.indices.length > 0
+    );
 
   return (
     <div className="space-y-6 mb-4">
@@ -92,131 +114,186 @@ export default function IndicesPage() {
         <div className="flex flex-wrap items-center gap-2 pb-2">
           {/* CATEGORY */}
           <button
-            onClick={() => setSelectedFilter("CATEGORY")}
+            onClick={() =>
+              setSelectedFilter("CATEGORY")
+            }
             className={`
+              inline-flex
+              items-center
+              gap-2
+
               text-xs
-              font-medium
+              font-semibold
+
               px-3
-              py-1
+              py-1.5
+
               rounded-full
               transition-all
+              duration-300
+
+              hover:scale-[1.03]
+
               ${
                 selectedFilter === "CATEGORY"
                   ? "bg-orange-500 text-white shadow-md"
-                  : "bg-orange-200 dark:bg-orange-900 dark:text-orange-100"
+                  : "bg-orange-100 text-orange-700 dark:bg-orange-900 dark:text-orange-100"
               }
             `}
           >
+            <LayoutGrid size={14} />
             Category {indicesData.length}
           </button>
 
           {/* TOTAL */}
           <button
-            onClick={() => setSelectedFilter("ALL")}
+            onClick={() =>
+              setSelectedFilter("ALL")
+            }
             className={`
+              inline-flex
+              items-center
+              gap-2
+
               text-xs
-              font-medium
+              font-semibold
+
               px-3
-              py-1
+              py-1.5
+
               rounded-full
               transition-all
+              duration-300
+
+              hover:scale-[1.03]
+
               ${
                 selectedFilter === "ALL"
                   ? "bg-blue-600 text-white shadow-md"
-                  : "bg-blue-200 dark:bg-blue-900 dark:text-blue-100"
+                  : "bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-100"
               }
             `}
           >
+            <BarChart3 size={14} />
             Total {indicesTotal}
           </button>
 
-          {/* ADVANCE */}
+          {/* ADV */}
           <button
-            onClick={() => setSelectedFilter("ADV")}
+            onClick={() =>
+              setSelectedFilter("ADV")
+            }
             className={`
+              inline-flex
+              items-center
+              gap-2
+
               text-xs
-              font-medium
+              font-semibold
+
               px-3
-              py-1
+              py-1.5
+
               rounded-full
               transition-all
+              duration-300
+
+              hover:scale-[1.03]
+
               ${
                 selectedFilter === "ADV"
                   ? "bg-emerald-600 text-white shadow-md"
-                  : "bg-emerald-200 dark:bg-emerald-900 dark:text-emerald-100"
+                  : "bg-emerald-100 text-emerald-700 dark:bg-emerald-900 dark:text-emerald-100"
               }
             `}
           >
+            <TrendingUp size={14} />
             Advance {indicesAdv}
           </button>
 
-          {/* DECLINE */}
+          {/* DEC */}
           <button
-            onClick={() => setSelectedFilter("DEC")}
+            onClick={() =>
+              setSelectedFilter("DEC")
+            }
             className={`
+              inline-flex
+              items-center
+              gap-2
+
               text-xs
-              font-medium
+              font-semibold
+
               px-3
-              py-1
+              py-1.5
+
               rounded-full
               transition-all
+              duration-300
+
+              hover:scale-[1.03]
+
               ${
                 selectedFilter === "DEC"
                   ? "bg-rose-600 text-white shadow-md"
-                  : "bg-rose-200 dark:bg-rose-900 dark:text-rose-100"
+                  : "bg-rose-100 text-rose-700 dark:bg-rose-900 dark:text-rose-100"
               }
             `}
           >
+            <TrendingDown size={14} />
             Decline {indicesDec}
           </button>
 
           {/* NEUTRAL */}
           <button
-            onClick={() => setSelectedFilter("NEU")}
+            onClick={() =>
+              setSelectedFilter("NEU")
+            }
             className={`
+              inline-flex
+              items-center
+              gap-2
+
               text-xs
-              font-medium
+              font-semibold
+
               px-3
-              py-1
+              py-1.5
+
               rounded-full
               transition-all
+              duration-300
+
+              hover:scale-[1.03]
+
               ${
                 selectedFilter === "NEU"
                   ? "bg-gray-700 text-white shadow-md"
-                  : "bg-gray-200 dark:bg-gray-800 dark:text-gray-100"
+                  : "bg-gray-200 text-gray-700 dark:bg-gray-800 dark:text-gray-100"
               }
             `}
           >
-            Un Change {indicesNutral}
+            <Minus size={14} />
+            Neutral {indicesNutral}
           </button>
         </div>
       </HeaderRow>
 
-      {/* CARDS */}
+      {/* GRID */}
       <div
         className="
           grid
           grid-cols-1
           md:grid-cols-2
+          lg:grid-cols-3
           xl:grid-cols-3
+          2xl:grid-cols-4
           gap-4
           items-start
         "
       >
-        {filteredData.map((category, index) => {
-          const positiveCount = category.indices.filter(
-            (item) => item.pchange > 0,
-          ).length;
-
-          const negativeCount = category.indices.filter(
-            (item) => item.pchange < 0,
-          ).length;
-
-          const neutralCount = category.indices.filter(
-            (item) => item.pchange === 0,
-          ).length;
-
-          return (
+        {filteredData.map(
+          (category, index) => (
             <div
               key={index}
               className="
@@ -233,7 +310,7 @@ export default function IndicesPage() {
                 overflow-hidden
               "
             >
-              {/* CARD HEADER */}
+              {/* HEADER */}
               <div
                 className="
                   sticky
@@ -251,7 +328,6 @@ export default function IndicesPage() {
                 <h3
                   className="
                     text-sm
-                    sm:text-base
                     font-bold
                     text-gray-800
                     dark:text-gray-100
@@ -259,17 +335,17 @@ export default function IndicesPage() {
                 >
                   {category.category}
                 </h3>
-
-                
               </div>
 
-              {/* CHART */}
+              {/* CONTENT */}
               <div className="p-4">
-                <IndicesPerformanceChart data={category.indices} />
+                <IndicesPerformanceChart
+                  data={category.indices}
+                />
               </div>
             </div>
-          );
-        })}
+          )
+        )}
       </div>
     </div>
   );

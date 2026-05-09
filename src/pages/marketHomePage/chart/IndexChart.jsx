@@ -13,7 +13,7 @@ export default function IndexChart({ change, symbol, range, interval, setChangeV
     const [data, setData] = useState([]);
 
     useEffect(() => {
-        fetch(`${API_V1_BASSE_URL}/history/${symbol}/${range}/${interval}`)
+        fetch(`${API_V1_BASSE_URL}/history/indices/${symbol}/${range}/${interval}`)
             .then((res) => res.json())
             .then((data) => {
                 const formatted = data.map(item => ({

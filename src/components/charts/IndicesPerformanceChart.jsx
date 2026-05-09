@@ -1,11 +1,12 @@
 import { Link, useNavigate } from "react-router-dom";
-import { TrendingUp, TrendingDown } from "lucide-react";
+import { TrendingUp, TrendingDown, BarChart3, Minus } from "lucide-react";
+
 import { useMemo, useState } from "react";
 
 export default function IndicesPerformanceChart({ data = [] }) {
   const navigate = useNavigate();
 
-  // LOCAL FILTER FOR EACH CARD
+  // LOCAL FILTER
   const [selectedFilter, setSelectedFilter] = useState("ALL");
 
   // FILTER + SORT
@@ -60,12 +61,22 @@ export default function IndicesPerformanceChart({ data = [] }) {
         <button
           onClick={() => setSelectedFilter("ALL")}
           className={`
+            inline-flex
+            items-center
+            gap-1.5
+
             text-[11px]
-            font-medium
-            px-2
+            font-semibold
+
+            px-2.5
             py-1
+
             rounded-full
             transition-all
+            duration-300
+
+            hover:scale-[1.03]
+
             ${
               selectedFilter === "ALL"
                 ? "bg-blue-600 text-white shadow"
@@ -73,19 +84,30 @@ export default function IndicesPerformanceChart({ data = [] }) {
             }
           `}
         >
-          Total {totalCount}
+          <BarChart3 size={12} />
+          {totalCount}
         </button>
 
-        {/* ADVANCE */}
+        {/* ADV */}
         <button
           onClick={() => setSelectedFilter("ADV")}
           className={`
+            inline-flex
+            items-center
+            gap-1.5
+
             text-[11px]
-            font-medium
-            px-2
+            font-semibold
+
+            px-2.5
             py-1
+
             rounded-full
             transition-all
+            duration-300
+
+            hover:scale-[1.03]
+
             ${
               selectedFilter === "ADV"
                 ? "bg-emerald-600 text-white shadow"
@@ -93,19 +115,30 @@ export default function IndicesPerformanceChart({ data = [] }) {
             }
           `}
         >
-          Advance {positiveCount}
+          <TrendingUp size={12} />
+          {positiveCount}
         </button>
 
-        {/* DECLINE */}
+        {/* DEC */}
         <button
           onClick={() => setSelectedFilter("DEC")}
           className={`
+            inline-flex
+            items-center
+            gap-1.5
+
             text-[11px]
-            font-medium
-            px-2
+            font-semibold
+
+            px-2.5
             py-1
+
             rounded-full
             transition-all
+            duration-300
+
+            hover:scale-[1.03]
+
             ${
               selectedFilter === "DEC"
                 ? "bg-rose-600 text-white shadow"
@@ -113,19 +146,30 @@ export default function IndicesPerformanceChart({ data = [] }) {
             }
           `}
         >
-          Decline {negativeCount}
+          <TrendingDown size={12} />
+          {negativeCount}
         </button>
 
-        {/* NEUTRAL */}
+        {/* NEU */}
         <button
           onClick={() => setSelectedFilter("NEU")}
           className={`
+            inline-flex
+            items-center
+            gap-1.5
+
             text-[11px]
-            font-medium
-            px-2
+            font-semibold
+
+            px-2.5
             py-1
+
             rounded-full
             transition-all
+            duration-300
+
+            hover:scale-[1.03]
+
             ${
               selectedFilter === "NEU"
                 ? "bg-gray-700 text-white shadow"
@@ -133,7 +177,8 @@ export default function IndicesPerformanceChart({ data = [] }) {
             }
           `}
         >
-          Neutral {neutralCount}
+          <Minus size={12} />
+          {neutralCount}
         </button>
       </div>
 
@@ -200,7 +245,7 @@ export default function IndicesPerformanceChart({ data = [] }) {
 
                   {/* BADGES */}
                   <div className="mt-1 flex items-center gap-2 flex-wrap">
-                    {/* LTP */}
+                    {/* LAST */}
                     <span
                       className={`
                         text-[11px]
@@ -215,7 +260,7 @@ export default function IndicesPerformanceChart({ data = [] }) {
                         }
                       `}
                     >
-                       {Number(item.last).toFixed(2)}
+                      {Number(item.last).toFixed(2)}
                     </span>
 
                     {/* CHANGE */}
@@ -233,7 +278,8 @@ export default function IndicesPerformanceChart({ data = [] }) {
                         }
                       `}
                     >
-                       {Number(item.change).toFixed(2)}
+                      {positive ? "+" : ""}
+                      {Number(item.change).toFixed(2)}
                     </span>
                   </div>
                 </div>
@@ -266,7 +312,7 @@ export default function IndicesPerformanceChart({ data = [] }) {
                 </div>
               </div>
 
-              {/* PROGRESS BAR */}
+              {/* PROGRESS */}
               <div className="mt-3">
                 <div
                   className="

@@ -10,29 +10,29 @@ import { TrendingIndices, TrendingIndustry, TrendingSector } from "./components/
 export default function MarketHomeIndex() {
 
 
-    const indicesData = [
-        {
-            name: "Nifty 50",
-            symbol: "NIFTY 50",
-            groww_symbol: "NIFTY",
-            iconName: "nifty",
-            exchange: "nse"
-        },
-        {
-            name: "Bank Nifty",
-            symbol: "BANKNIFTY",
-            groww_symbol: "BANKNIFTY",
-            iconName: "nifty",
-            exchange: "nse"
-        },
-        {
-            name: "Sensex",
-            symbol: "NIFTY",
-            groww_symbol: "NIFTY",
-            iconName: "bse",
-            exchange: "bse"
-        },
-    ];
+const indicesData = [
+    {
+        name: "Nifty 50",
+        symbol: "NIFTY 50",
+        groww_symbol: "NIFTY",
+        iconName: "nifty",
+        exchange: "nse"
+    },
+    {
+        name: "Bank Nifty",
+        symbol: "BANKNIFTY",
+        groww_symbol: "BANKNIFTY",
+        iconName: "nifty",
+        exchange: "nse"
+    },
+    {
+        name: "Nifty Fin Service",
+        symbol: "NIFTY FIN SERVICE",
+        groww_symbol: "FINNIFTY",
+        iconName: "nifty",
+        exchange: "nse"
+    },
+];
 
     return (
         <div className="space-y-6 pb-100">
