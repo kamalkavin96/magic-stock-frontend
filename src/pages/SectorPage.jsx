@@ -107,9 +107,9 @@ export default function SectorPage() {
     return (
         <div className="space-y-6 m-1 mb-10">
 
-            <SectorHeader />
+            {/* <SectorHeader /> */}
 
-            <HeaderRow header={"Sector Performance"} link={"/market/indices"} linkText={"View All"} />
+            <HeaderRow header={"Sector List"} link={"/market/indices"} linkText={"View All"} />
 
             <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3">
 
@@ -125,12 +125,12 @@ export default function SectorPage() {
                                     alt="Sector Icon"
                                 />
                             </div>
-                            <div className="w-60">
+                            <div className="w-60 pl-1">
                                 <div className="h-1/2 flex items-end">
                                     <h5 className="text-gray-900 dark:text-gray-100 font-bold">{sector.name}</h5>
                                 </div>
                                 <div className="text-gray-600 dark:text-gray-400 text-sm mb-1 h-1/2 flex items-start">
-                                    Industries: {sector.industry_count} | Stocks: {sector.stock_count}
+                                    Industries: {sector.industryCount} | Stocks: {sector.stockCount}
                                 </div>
 
                             </div>
