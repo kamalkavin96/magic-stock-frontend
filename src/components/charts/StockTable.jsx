@@ -184,12 +184,11 @@ export default function StockTable({ stocks = [], type }) {
                 <div className="flex items-center gap-2">
                   <div
                     className="
-                    h-8
-                    w-8
-                    rounded-lg
+                    h-15
+                    w-15
                     bg-gray-100
                     dark:bg-gray-800
-                    border
+                    rounded-full
                     border-gray-200
                     dark:border-gray-700
                     flex
@@ -199,7 +198,7 @@ export default function StockTable({ stocks = [], type }) {
                     shrink-0"
                   >
                     <img
-                      className="w-5 h-5 rounded-full"
+                      className="w-14 h-14 rounded-full"
                       src={`${EQUITY_ICON_URL}/${stock.symbol}.png`}
                       onError={(e) => {
                         e.target.style.display = "none";
